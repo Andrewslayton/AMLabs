@@ -1,0 +1,7 @@
+FinalProject/datasetcreation/data_split
+FinalProject/datasetcreation/scraped_images
+FinalProject/datasets/*
+FinalProject/scraped_images
+*.h5
+*.keras
+FinalProject/predictionImages
