@@ -3,15 +3,20 @@ import matplotlib.pyplot as plt
 import os
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.models import load_model, Model
+
 
 # Load the trained model
-model = load_model('model.h5')
+model = keras.models.load_model('model.keras')
 
 # Initialize the data generator for prediction images (only rescaling)
 predict_datagen = ImageDataGenerator(rescale=1./255)
 
 # Set the path to your prediction images
-prediction_dir = 'predictionImages/'
+prediction_dir = 'predictionImages/prediction/'
 
 # Check if the directory exists and has images
 if not os.path.exists(prediction_dir) or not os.listdir(prediction_dir):
@@ -32,16 +37,15 @@ predictions = model.predict(predict_generator, steps=len(predict_generator))
 
 predicted_class_indices = np.argmax(predictions, axis=1)
 
-class_labels = ['bagel','blueberries','cake','cherry','eggs','pasta','soda','steak', 'tree', 'watermelon']
+class_labels = ['brownie','cake','cherry','eggs','miso soup','soda','steak', 'sundae', 'tree', 'watermelon']
 
 predicted_class_labels = [class_labels[idx] for idx in predicted_class_indices]
 
-num_images = 12
+num_images = 16
 
-# Create a grid of subplots
+
 fig, axes = plt.subplots(nrows=1, ncols=num_images, figsize=(20, 3))
 
-# Ensure we don't attempt to access more images than available
 num_images = min(num_images, len(predict_generator.filenames))
 
 for i in range(num_images):

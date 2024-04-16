@@ -21,11 +21,11 @@ test_dir = f'{project_dir}/test'
 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
-    rotation_range=15,  
-    width_shift_range=0.15,
-    height_shift_range=0.15,
+    rotation_range=30,  
+    width_shift_range=0.35,
+    height_shift_range=0.35,
     shear_range=0.15,
-    zoom_range=0.15,
+    zoom_range=0.25,
     horizontal_flip=True,
     fill_mode='nearest',
     brightness_range=[0.8, 1.2] 
@@ -150,4 +150,4 @@ print("Classification Report")
 target_names = list(test_generator.class_indices.keys())
 print(classification_report(true_classes, predicted_classes, target_names=target_names))
 
-model.save('model.keras')
+model.save('modelf.h5')
